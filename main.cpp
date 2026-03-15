@@ -13,7 +13,6 @@ int main() {
 
     Guild myGuild("Default Guild");
     Hero* heroes[15];
-    int heroType[15]; // 1=Hero, 2=Warrior, 3=Knight, 4=Spellblade
     int heroCount = 0;
 
     int choice = -1;
@@ -50,10 +49,7 @@ int main() {
                 break;
             }
             case 2: {
-                if (heroCount >= 15) {
-                    cout << "Cannot add more heroes (limit 15).\n";
-                    break;
-                }
+                
                 string name;
                 int health, power;
                 cout << "Hero name: ";
@@ -63,17 +59,13 @@ int main() {
                 cout << "Hero base power: ";
                 cin >> power;
                 heroes[heroCount] = new Hero(name, health, power);
-                heroType[heroCount] = 1;
                 myGuild += heroes[heroCount];
                 heroCount++;
                 cout << "Hero added.\n";
                 break;
             }
             case 3: {
-                if (heroCount >= 15) {
-                    cout << "Cannot add more heroes (limit 15).\n";
-                    break;
-                }
+                
                 string name;
                 int health, power, armor;
                 cout << "Warrior name: ";
@@ -86,7 +78,6 @@ int main() {
                 cin >> armor;
                 Warrior* w = new Warrior(name, health, power, armor);
                 heroes[heroCount] = w;
-                heroType[heroCount] = 2;
                 myGuild += w;
                 heroCount++;
                 cout << "Warrior added.\n";
@@ -94,10 +85,7 @@ int main() {
                 break;
             }
             case 4: {
-                if (heroCount >= 15) {
-                    cout << "Cannot add more heroes (limit 15).\n";
-                    break;
-                }
+                
                 string name;
                 int health, power, armor, charge;
                 cout << "Knight name: ";
@@ -112,7 +100,6 @@ int main() {
                 cin >> charge;
                 Knight* k = new Knight(name, health, power, armor, charge);
                 heroes[heroCount] = k;
-                heroType[heroCount] = 3;
                 myGuild += k;
                 heroCount++;
                 cout << "Knight added.\n";
@@ -120,10 +107,7 @@ int main() {
                 break;
             }
             case 5: {
-                if (heroCount >= 15) {
-                    cout << "Cannot add more heroes (limit 15).\n";
-                    break;
-                }
+                
                 string name;
                 int health, power, armor, mana, spell;
                 cout << "Spellblade name: ";
@@ -140,7 +124,6 @@ int main() {
                 cin >> spell;
                 Spellblade* s = new Spellblade(name, health, power, armor, mana, spell);
                 heroes[heroCount] = s;
-                heroType[heroCount] = 4;
                 myGuild += s;
                 heroCount++;
                 cout << "Spellblade added.\n";
@@ -161,18 +144,11 @@ int main() {
                     break;
                 }
                 int idx;
-                cout << "Enter hero number (1-" << heroCount << "): ";
+                cout << "Enter hero number: ";
                 cin >> idx;
-                if (idx < 1 || idx > heroCount) {
-                    cout << "Invalid hero number.\n";
-                    break;
-                }
-                if (heroType[idx - 1] != 2) {
-                    cout << "Selected hero is not a Warrior.\n";
-                    break;
-                }
-                Warrior* w = static_cast<Warrior*>(heroes[idx - 1]);
-                cout << "Effective Health: " << w->calculateEffectiveHealth() << '\n';
+                cout << "Effective Health: "
+                     << static_cast<Warrior*>(heroes[idx - 1])->calculateEffectiveHealth()
+                     << '\n';
                 break;
             }
             case 9: {
@@ -181,18 +157,11 @@ int main() {
                     break;
                 }
                 int idx;
-                cout << "Enter hero number (1-" << heroCount << "): ";
+                cout << "Enter hero number: ";
                 cin >> idx;
-                if (idx < 1 || idx > heroCount) {
-                    cout << "Invalid hero number.\n";
-                    break;
-                }
-                if (heroType[idx - 1] != 3) {
-                    cout << "Selected hero is not a Knight.\n";
-                    break;
-                }
-                Knight* k = static_cast<Knight*>(heroes[idx - 1]);
-                cout << "Burst Damage: " << k->calculateBurstDamage() << '\n';
+                cout << "Burst Damage: "
+                     << static_cast<Knight*>(heroes[idx - 1])->calculateBurstDamage()
+                     << '\n';
                 break;
             }
             case 10: {
@@ -201,18 +170,11 @@ int main() {
                     break;
                 }
                 int idx;
-                cout << "Enter hero number (1-" << heroCount << "): ";
+                cout << "Enter hero number: ";
                 cin >> idx;
-                if (idx < 1 || idx > heroCount) {
-                    cout << "Invalid hero number.\n";
-                    break;
-                }
-                if (heroType[idx - 1] != 4) {
-                    cout << "Selected hero is not a Spellblade.\n";
-                    break;
-                }
-                Spellblade* s = static_cast<Spellblade*>(heroes[idx - 1]);
-                cout << "Hybrid Damage: " << s->calculateHybridDamage() << '\n';
+                cout << "Hybrid Damage: "
+                     << static_cast<Spellblade*>(heroes[idx - 1])->calculateHybridDamage()
+                     << '\n';
                 break;
             }
             case 0: {
